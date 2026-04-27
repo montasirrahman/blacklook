@@ -1,4 +1,4 @@
-name: blacklook
+name: darklook
 channels:
   - conda-forge
   - defaults
